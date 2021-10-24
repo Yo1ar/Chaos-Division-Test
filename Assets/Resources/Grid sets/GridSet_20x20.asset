@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76b3d447d17a23e4ba4a3a690e578792, type: 3}
+  m_Name: GridSet_20x20
+  m_EditorClassIdentifier: 
+  width: 20
+  height: 20
+  tilePrefab: {fileID: 3595734004980654068, guid: 23f3910eee8856b43ad8e9a936858cc3, type: 3}

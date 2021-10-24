@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd1ba49dbde445aaf0eef0b91b963fe, type: 3}
+  m_Name: WoocuttersHut
+  m_EditorClassIdentifier: 
+  buildingType: 3
+  buildingPrefab: {fileID: 5933059519712022078, guid: d4123fb9731317b4c88d191fb4a12dc7, type: 3}
+  buildingDescription: Where would you do your Woody Woodpeaker things?

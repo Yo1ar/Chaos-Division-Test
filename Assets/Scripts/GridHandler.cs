@@ -24,16 +24,23 @@ public class GridHandler : MonoBehaviour
         {
             for (int j = 0; j < gridSettings.height; j++)
             {
-                Vector3 instantiatePosition = new Vector3(i, 0, j);
-                GameObject gridTIle = Instantiate(gridSettings.tilePrefab, instantiatePosition, Quaternion.identity, this.transform);
-                gridTIle.name = $"tile {i},{j}";
-
-                _tiles[i, j] = gridTIle.GetComponent<TileComponent>();
+                _tiles[i, j] = InstantiateGridTile(i, j);
                 _tiles[i, j].InitTileCoords(i, j, this);
+                
+                _tiles[i,j].gameObject.name = $"tile {i},{j}";
             }
         }
     }
 
+    private TileComponent InstantiateGridTile(float x, float z)
+    {
+        Vector3 instantiatePosition = new Vector3(x, 0, z);
+        GameObject gridTIle = Instantiate(gridSettings.tilePrefab, instantiatePosition, Quaternion.identity, this.transform);
+        TileComponent gridTIleComponent = gridTIle.GetComponent<TileComponent>();
+
+        return gridTIleComponent;
+    }
+    
     public void InstantiateBuildingOfType(BuildingType buildingType, Vector3 position)
     {
         TileComponent tile = _tiles[(int) position.x, (int) position.z];

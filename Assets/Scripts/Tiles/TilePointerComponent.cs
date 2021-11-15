@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UI;
 
-
 namespace Tiles
 {
     [RequireComponent(typeof(MeshRenderer))]
@@ -24,22 +23,30 @@ namespace Tiles
 
         public override void OnPointerEnter(PointerEventData eventData) => SetMeshRendererColor(pointerEnterTileColor);
         public override void OnPointerExit (PointerEventData eventData) => SetMeshRendererColor(defaultTileColor);
-        public override void OnPointerClick(PointerEventData eventData) => ShowPopUp();
+        public override void OnPointerClick(PointerEventData eventData)
+        {
+            if (eventData.button == PointerEventData.InputButton.Left)
+                ShowPopUp();
+        } 
 
         private void ShowPopUp()
         {
             GameObject popUp = Instantiate(tileComponent.gridHandler.popUpWindow, this.transform.position, Quaternion.identity);
-            popUp.TryGetComponent(out PupUp popUpComponent);
+            PopUpComponent popUpComponent = popUp.GetComponent<PopUpComponent>();
 
+            SetPopUpText(popUpComponent);
+        }
+        private void SetPopUpText(PopUpComponent popUpComponent)
+        {
             if (tileComponent.isEmpty)
-                popUpComponent.SetPopUpText("Empty");
+                popUpComponent.popUpText.text = "Empty";
             else
             {
                 BuildingSo buildingSo = tileComponent.gridHandler.FindBuildingSoOfType(tileComponent.buildingType);
-                popUpComponent.SetPopUpText(buildingSo.buildingDescription);
+                popUpComponent.popUpText.text = buildingSo.buildingDescription;
             }
         }
-
+        
         private void SetMeshRendererColor(Color color) => _meshRenderer.material.color = color;
     }
 }

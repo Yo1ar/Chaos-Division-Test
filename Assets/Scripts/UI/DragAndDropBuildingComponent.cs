@@ -1,10 +1,9 @@
-﻿using System;
-using Buildings;
+﻿using Buildings;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace DragAndDrop
+namespace UI
 {
     public class DragAndDropBuildingComponent : MonoBehaviour, IDragHandler, IEndDragHandler
     {

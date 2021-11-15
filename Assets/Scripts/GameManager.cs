@@ -12,6 +12,13 @@ public class GameManager : MonoBehaviour
     
     private void Awake()
     {
+        SetSingleton();
+
+        gridHandler = FindObjectOfType<GridHandler>();
+    }
+
+    private void SetSingleton()
+    {
         if (!singleton)
         {
             singleton = this;
@@ -19,10 +26,8 @@ public class GameManager : MonoBehaviour
         }
         else
             Destroy(this.gameObject);
-
-        gridHandler = FindObjectOfType<GridHandler>();
     }
-
+    
     public void SetMousePosition(InputAction.CallbackContext context) => mousePosition = context.ReadValue<Vector2>();
     
     public Vector3 GetWorldPointMousePosition()

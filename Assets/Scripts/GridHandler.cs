@@ -24,7 +24,8 @@ public class GridHandler : MonoBehaviour
         {
             for (int j = 0; j < gridSettings.height; j++)
             {
-                _tiles[i, j] = InstantiateGridTile(i, j);
+                GameObject gridTile = InstantiateAndReturnGridTile(i, j);
+                _tiles[i, j] = gridTile.GetComponent<TileComponent>();
                 _tiles[i, j].InitTileCoords(i, j, this);
                 
                 _tiles[i,j].gameObject.name = $"tile {i},{j}";
@@ -32,13 +33,12 @@ public class GridHandler : MonoBehaviour
         }
     }
 
-    private TileComponent InstantiateGridTile(float x, float z)
+    private GameObject InstantiateAndReturnGridTile(float x, float z)
     {
         Vector3 instantiatePosition = new Vector3(x, 0, z);
         GameObject gridTIle = Instantiate(gridSettings.tilePrefab, instantiatePosition, Quaternion.identity, this.transform);
-        TileComponent gridTIleComponent = gridTIle.GetComponent<TileComponent>();
 
-        return gridTIleComponent;
+        return gridTIle;
     }
     
     public void InstantiateBuildingOfType(BuildingType buildingType, Vector3 position)
@@ -47,23 +47,33 @@ public class GridHandler : MonoBehaviour
         if (!tile.isEmpty) return;
         
         BuildingSo buildingSO = FindBuildingSoOfType(buildingType);
-        GameObject newBuilding = Instantiate(buildingSO.buildingPrefab, position, Quaternion.identity, this.transform);
+        if (buildingSO == null) return;
         
+        GameObject newBuilding =
+            Instantiate(buildingSO.buildingPrefab, position, Quaternion.identity, this.transform);
+            
         tile.isEmpty = false;
         tile.buildingType = buildingSO.buildingType;
     }
+    
     public BuildingSo FindBuildingSoOfType(BuildingType buildingType)
     {
         BuildingSo building = null;
 
         foreach (BuildingSo buildingSo in buildings)
         {
+            if (buildingSo == null)
+            {
+                Debug.LogError("There is no such building in GridHandler component");
+                continue;
+            }
+
             if (buildingType != buildingSo.buildingType) continue;
             
             building = buildingSo;
             break;
         }
-
+        
         return building;
     }
 }
